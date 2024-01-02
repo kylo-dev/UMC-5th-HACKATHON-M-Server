@@ -5,7 +5,7 @@ import lombok.Getter;
 
 public class CommentRequest {
 
-    @Schema(description = "게시글 작성 DTO")
+    @Schema(description = "댓글 작성 DTO")
     @Getter
     public static class WriteDTO{
 
