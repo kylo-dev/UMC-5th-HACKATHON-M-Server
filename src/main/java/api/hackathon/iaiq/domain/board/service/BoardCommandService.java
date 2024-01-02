@@ -33,11 +33,12 @@ public class BoardCommandService {
     // 게시글 작성 로직
     public BoardResponse.BoardResultDTO writeBoard(BoardRequest.WriteDTO request) {
         BoardCategory boardCategory = boardCategoryRepository.findByTopic(request.getTopic()).orElseThrow(()-> new ApiException(ErrorType._BOARD_CATEGORY_NOT_FOUND));
-        Board newBoard = BoardConverter.toBoard(request, boardCategory);
 
         // 작성자 회원 조회
         Member loginMember = getCurrentMember();
-        newBoard.writeMember(loginMember);
+
+        Board newBoard = BoardConverter.toBoard(request, boardCategory, loginMember);
+
         boardRepository.save(newBoard);
         return BoardConverter.toBoardResultDTO(newBoard);
     }

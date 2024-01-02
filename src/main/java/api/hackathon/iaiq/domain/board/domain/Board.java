@@ -5,6 +5,7 @@ import api.hackathon.iaiq.domain.base.BaseTimeEntity;
 import api.hackathon.iaiq.domain.boardCategory.domain.BoardCategory;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 @Entity
 @Getter
@@ -39,6 +40,7 @@ public class Board extends BaseTimeEntity {
     //== 연관관계 편의 메소드 ==//
     public void writeMember(Member member){
         this.member = member;
+        Hibernate.initialize(member.getBoardList());
         member.getBoardList().add(this);
     }
 }

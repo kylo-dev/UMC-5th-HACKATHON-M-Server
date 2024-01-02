@@ -1,5 +1,6 @@
 package api.hackathon.iaiq.domain.board.converter;
 
+import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
@@ -13,10 +14,11 @@ import java.util.stream.Collectors;
 public class BoardConverter {
 
     // WriteDTO -> Board 엔티티로 변환 함수
-    public static Board toBoard(BoardRequest.WriteDTO request, BoardCategory boardCategory){
+    public static Board toBoard(BoardRequest.WriteDTO request, BoardCategory boardCategory, Member member){
         return Board.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
+                .member(member)
                 .boardCategory(boardCategory)
                 .build();
     }

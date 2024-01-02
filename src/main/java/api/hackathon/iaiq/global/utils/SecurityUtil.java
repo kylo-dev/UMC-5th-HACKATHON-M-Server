@@ -3,6 +3,7 @@ package api.hackathon.iaiq.global.utils;
 import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.global.exception.ApiException;
 import api.hackathon.iaiq.global.exception.ErrorType;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
