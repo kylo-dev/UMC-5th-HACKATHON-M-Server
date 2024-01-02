@@ -1,5 +1,8 @@
 package api.hackathon.iaiq.global.config;
 
+import api.hackathon.iaiq.global.security.jwt.JwtAuthenticationFilter;
+import api.hackathon.iaiq.global.security.ouath.CustomOAuth2UserService;
+import api.hackathon.iaiq.global.security.ouath.CustomOAuthSuccessHandler;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -10,6 +13,7 @@ import org.springframework.security.config.annotation.web.configurers.CsrfConfig
 import org.springframework.security.config.annotation.web.configurers.HttpBasicConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
 
 @Configuration
@@ -17,6 +21,9 @@ import org.springframework.web.cors.CorsConfiguration;
 @RequiredArgsConstructor
 public class SecurityConfig {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final JwtAuthenticationFilter jwtAuthenticationFilter;
+    private final CustomOAuthSuccessHandler customOAuthSuccessHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -40,12 +47,28 @@ public class SecurityConfig {
                                         "/actuator/**"
                                         , "/swagger-ui/**"
                                         , "/api-docs/swagger-config"
+                                        , "/members/login"
                                         ,"/oauth/**"
                                         ,"/favicon.ico"
                                         ,"/login/**"
                                         , "/**"
                                 ).permitAll()
                                 .anyRequest().permitAll());
+        http
+                .oauth2Login()
+                .authorizationEndpoint()
+                    .baseUri("/login")
+                .and()
+                .redirectionEndpoint()
+                    .baseUri("/login/oauth2/code/kakao")
+                .and()
+                .userInfoEndpoint()
+                .userService(customOAuth2UserService)
+                    .and()
+                .successHandler(customOAuthSuccessHandler);
+
+
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
