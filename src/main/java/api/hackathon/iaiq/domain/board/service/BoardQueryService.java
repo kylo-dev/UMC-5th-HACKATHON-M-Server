@@ -1,5 +1,6 @@
 package api.hackathon.iaiq.domain.board.service;
 
+import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+
+import static api.hackathon.iaiq.global.utils.SecurityUtil.getCurrentMember;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,6 +40,13 @@ public class BoardQueryService {
      */
     public BoardResponse.BoardPreViewListDTO getBoardPreViewList(Integer page){
         Page<Board> boards = boardRepository.findAll(PageRequest.of(page, 10));
+        return BoardConverter.toBoardPreViewListDTO(boards);
+    }
+
+    // 로그인한 사용자가 작성한 게시글 조회(페이징)
+    public BoardResponse.BoardPreViewListDTO getBoardPreViewListByMember(Integer page){
+        Member loginMember = getCurrentMember();
+        Page<Board> boards = boardRepository.findAllByMember(loginMember, PageRequest.of(page, 10));
         return BoardConverter.toBoardPreViewListDTO(boards);
     }
 }

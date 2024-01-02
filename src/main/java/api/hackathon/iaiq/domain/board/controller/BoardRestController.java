@@ -1,5 +1,6 @@
 package api.hackathon.iaiq.domain.board.controller;
 
+import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
@@ -16,6 +17,8 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
+
+import static api.hackathon.iaiq.global.utils.SecurityUtil.getCurrentMember;
 
 @Tag(name = "board", description = "커뮤니티 게시글 API")
 @RestController
@@ -51,17 +54,16 @@ public class BoardRestController {
         return new SuccessResponse<>(boardQueryService.getBoardDetail(boardId));
     }
 
-    @GetMapping("/{memberId}")
+    @GetMapping("/my")
     @Operation(summary = "로그인한 사용자의 커뮤니티 모든 게시글 조회", description = "로그인한 사용자의 커뮤니티에 모든 글을 조회하는 API입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
     @Parameters({
-            @Parameter(name = "memberId", description = "사용자의 아이디, Path Variable입니다.")
+            @Parameter(name = "page", description = "내가 작성한 커뮤니티 게시글 목록의 페이지 번호, query sring으로 전달해주세요.")
     })
-    public SuccessResponse<> getMemberOfBoard(@PathVariable(name = "memberId") Long memberId){
-
-        return new SuccessResponse<>(null);
+    public SuccessResponse<BoardResponse.BoardPreViewListDTO> getMemberOfBoard(@RequestParam(name = "page") Integer page){
+        return new SuccessResponse<>(boardQueryService.getBoardPreViewListByMember(page));
     }
 
     @PostMapping("/")

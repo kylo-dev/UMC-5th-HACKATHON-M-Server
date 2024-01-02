@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import static api.hackathon.iaiq.global.utils.SecurityUtil.getCurrentMember;
+
 @Service
 @RequiredArgsConstructor
 @Transactional
@@ -26,7 +28,6 @@ public class BoardCommandService {
 
     private final BoardRepository boardRepository;
     private final BoardCategoryRepository boardCategoryRepository;
-    private final MemberQueryService memberQueryService;
 
     // 게시글 작성 로직
     public BoardResponse.BoardResultDTO writeBoard(BoardRequest.WriteDTO request) {
@@ -34,8 +35,8 @@ public class BoardCommandService {
         Board newBoard = BoardConverter.toBoard(request, boardCategory);
 
         // 작성자 회원 조회
-        Member writer = memberQueryService.findById(request.getMemberId());
-        newBoard.writeMember(writer);
+        Member loginMember = getCurrentMember();
+        newBoard.writeMember(loginMember);
         boardRepository.save(newBoard);
         return BoardConverter.toBoardResultDTO(newBoard);
     }

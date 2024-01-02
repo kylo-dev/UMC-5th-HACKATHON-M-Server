@@ -11,9 +11,6 @@ public class BoardRequest {
     @Getter
     public static class WriteDTO{
 
-        @Schema(description = "사용자 아이디")
-        private Long memberId;
-
         @Schema(description = "주제")
         private String topic;
 
