@@ -76,7 +76,7 @@ public class QuestionController {
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = AnswerResponse.class)))
     })
-    @PatchMapping("/answer/{answerId}")
+    @PatchMapping("/answer")
     public SuccessResponse<AnswerResponse> edit(@RequestBody AnswerEditRequest answerEditRequest) {
         AnswerResponse response = questionService.edit(answerEditRequest);
         return new SuccessResponse<>(response);

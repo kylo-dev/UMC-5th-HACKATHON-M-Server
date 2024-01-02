@@ -50,19 +50,6 @@ public class BoardRestController {
         return null;
     }
 
-    @GetMapping("/{boardId}/edit")
-    @Operation(summary = "커뮤니티 특정 글 수정 페이지로 이동", description = "커뮤니티 특정 글로 이동하는 API입니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
-    })
-    @Parameters({
-            @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
-    })
-    public SuccessResponse<BoardResponse.BoardEditDTO> editBoard(@PathVariable(name = "boardId") Long boardId){
-
-        return null;
-    }
-
     @PatchMapping("/{boardId}/edit")
     @Operation(summary = "커뮤니티 특정 글 수정", description = "커뮤니티 특정 글 수정하는 API입니다.")
     @ApiResponses(value = {
