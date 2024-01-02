@@ -23,7 +23,7 @@ public class BoardRestController {
     private final BoardQueryService boardQueryService;
     private final BoardCommandService boardCommandService;
 
-    @GetMapping("/")
+    @GetMapping()
     @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티에 작성된 모든 글의 목록을 조회하는 API이며, 페이징을 포함, query string으로 page 번호 전달해 주세요.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
@@ -60,7 +60,7 @@ public class BoardRestController {
         return new SuccessResponse<>(boardQueryService.getBoardPreViewListByMember(page));
     }
 
-    @PostMapping("/")
+    @PostMapping()
     @Operation(summary = "커뮤니티 게시글 작성", description = "커뮤니티에 글 작성하는 API입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")

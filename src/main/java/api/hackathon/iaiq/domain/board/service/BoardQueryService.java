@@ -13,7 +13,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
 
 import static api.hackathon.iaiq.global.utils.SecurityUtil.getCurrentMember;
 
@@ -48,5 +47,9 @@ public class BoardQueryService {
         Member loginMember = getCurrentMember();
         Page<Board> boards = boardRepository.findAllByMember(loginMember, PageRequest.of(page, 10));
         return BoardConverter.toBoardPreViewListDTO(boards);
+    }
+
+    public Board findById(Long boardId) {
+        return boardRepository.findById(boardId).orElseThrow(() -> new ApiException(ErrorType._BOARD_NOT_FOUND));
     }
 }
