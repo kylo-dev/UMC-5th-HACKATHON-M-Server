@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -63,5 +64,17 @@ public class QuestionController {
                                                 @RequestBody AnswerRequest answerRequest) {
         AnswerResponse response = questionService.edit(answerId, answerRequest);
         return new SuccessResponse<>(response);
+    }
+
+    @Operation(summary = "질문에 대한 답 삭제", description = "질문에 대한 답변을 삭제합니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "답변 삭제 성공",
+                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                            schema = @Schema(implementation = AnswerResponse.class)))
+    })
+    @DeleteMapping("/answer/{answerId}")
+    public SuccessResponse<Long> delete(@PathVariable Long answerId) {
+        Long deleteId = questionService.delete(answerId);
+        return new SuccessResponse<>(deleteId);
     }
 }

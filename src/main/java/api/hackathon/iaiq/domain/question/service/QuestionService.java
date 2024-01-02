@@ -36,4 +36,8 @@ public class QuestionService {
     public AnswerResponse edit(Long answerId, AnswerRequest answerRequest) {
         return null;
     }
+
+    public Long delete(Long answerId) {
+        return answerId;
+    }
 }
