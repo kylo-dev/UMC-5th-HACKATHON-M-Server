@@ -60,4 +60,11 @@ public class BoardRestController {
 
         return null;
     }
+
+    @PatchMapping("/{boardId}/edit")
+    public SuccessResponse<BoardResponse.WriteResultDTO> editProcBoard(@PathVariable(name = "boardId") Long boardId,
+                                                                       @RequestBody BoardRequest.EditDTO request){
+
+        return null;
+    }
 }
