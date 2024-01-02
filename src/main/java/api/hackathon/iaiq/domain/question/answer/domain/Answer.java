@@ -3,6 +3,8 @@ package api.hackathon.iaiq.domain.question.answer.domain;
 
 import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.domain.base.BaseEntity;
+import api.hackathon.iaiq.domain.question.answer.editor.AnswerEditor;
+import api.hackathon.iaiq.domain.question.answer.editor.AnswerEditor.AnswerEditorBuilder;
 import api.hackathon.iaiq.domain.question.domain.Question;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -40,4 +42,15 @@ public class Answer extends BaseEntity {
     private Member member;
 
     private String formatDate;
+
+    public AnswerEditorBuilder toEditor() {
+        return AnswerEditor.builder()
+                .content(content)
+                .formatDate(formatDate);
+    }
+
+    public void edit(AnswerEditor answerEditor) {
+        content = answerEditor.getContent();
+        formatDate = answerEditor.getFormatDate();
+    }
 }

@@ -80,8 +80,15 @@ public class QuestionService {
         return (Member) authentication.getPrincipal();
     }
 
-    public AnswerResponse edit(AnswerEditRequest answerEditRequest) {
-        return null;
+    public Long edit(AnswerEditRequest answerEditRequest) {
+
+        LocalDate localDate = answerEditRequest.getSearchDate();
+
+        String content = answerEditRequest.getContent();
+
+        Long editId = answerService.edit(localDate, content);
+
+        return editId;
     }
 
     public Long delete(SearchCondition searchCondition) {

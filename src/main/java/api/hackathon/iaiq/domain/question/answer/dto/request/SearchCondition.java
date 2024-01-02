@@ -10,13 +10,13 @@ import java.time.format.DateTimeParseException;
 public class SearchCondition {
 
     @Schema(description = "답 년도", example = "2023")
-    private String year;
+    public String year;
 
     @Schema(description = "답 월", example = "12")
-    private String month;
+    public String month;
 
     @Schema(description = "답 일", example = "25")
-    private String day;
+    public String day;
 
     public LocalDate getSearchDate() {
         try {
