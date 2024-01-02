@@ -28,7 +28,7 @@ public class Question {
 
     private String content;
 
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Category qnaType;
 
     @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
