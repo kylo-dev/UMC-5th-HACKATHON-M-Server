@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/boards")
 public class BoardRestController {
 
-
     @GetMapping("/")
     @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티에 작성된 모든 글의 목록을 조회하는 API입니다.")
     @ApiResponses(value = {
@@ -46,7 +45,7 @@ public class BoardRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
-    public SuccessResponse<BoardResponse.WriteResultDTO> writeBoard(@RequestBody BoardRequest.WriteDTO request) {
+    public SuccessResponse<BoardResponse.BoardResultDTO> writeBoard(@RequestBody BoardRequest.WriteDTO request) {
 
         return null;
     }
@@ -56,14 +55,37 @@ public class BoardRestController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
+    @Parameters({
+            @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
+    })
     public SuccessResponse<BoardResponse.BoardEditDTO> editBoard(@PathVariable(name = "boardId") Long boardId){
 
         return null;
     }
 
     @PatchMapping("/{boardId}/edit")
-    public SuccessResponse<BoardResponse.WriteResultDTO> editProcBoard(@PathVariable(name = "boardId") Long boardId,
+    @Operation(summary = "커뮤니티 특정 글 수정", description = "커뮤니티 특정 글 수정하는 API입니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
+    })
+    @Parameters({
+            @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
+    })
+    public SuccessResponse<BoardResponse.BoardResultDTO> editProcBoard(@PathVariable(name = "boardId") Long boardId,
                                                                        @RequestBody BoardRequest.EditDTO request){
+
+        return null;
+    }
+
+    @DeleteMapping("/{boardId}")
+    @Operation(summary = "커뮤니티 특정 글 삭제", description = "커뮤니티 특정 글 삭제하는 API입니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
+    })
+    @Parameters({
+            @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
+    })
+    public SuccessResponse<BoardResponse.BoardResultDTO> deleteBoard(@PathVariable(name = "boardId") Long boardId) {
 
         return null;
     }

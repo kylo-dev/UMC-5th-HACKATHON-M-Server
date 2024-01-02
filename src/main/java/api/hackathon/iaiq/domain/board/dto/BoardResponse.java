@@ -52,7 +52,7 @@ public class BoardResponse {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class WriteResultDTO {
+    public static class BoardResultDTO {
         private Long boardId;
         private LocalDateTime createdAt;
     }
