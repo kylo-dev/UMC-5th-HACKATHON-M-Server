@@ -27,7 +27,7 @@ public class BoardResponse {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class BoardPreVieListDTO {
+    public static class BoardPreViewListDTO {
         List<BoardPreViewDTO> boardList;
         Integer listSize;
         Integer totalPage;
@@ -36,6 +36,10 @@ public class BoardResponse {
         Boolean isLast;
     }
 
+
+    /*
+    게시글 상세 조회 dto
+     */
     // "댓글" 데이터 추가해야 함
     @Builder
     @Getter
@@ -48,6 +52,8 @@ public class BoardResponse {
         private String title;
         private String content;
     }
+
+
 
     @Builder
     @Getter

@@ -1,7 +1,10 @@
 package api.hackathon.iaiq.domain.board.controller;
 
+import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
+import api.hackathon.iaiq.domain.board.service.BoardCommandService;
+import api.hackathon.iaiq.domain.board.service.BoardQueryService;
 import api.hackathon.iaiq.global.success.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -18,12 +21,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/boards")
 public class BoardRestController {
 
+    private final BoardQueryService boardQueryService;
     @GetMapping("/")
     @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티에 작성된 모든 글의 목록을 조회하는 API입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
-    public SuccessResponse<BoardResponse.BoardPreVieListDTO> getBoardList(){
+    public SuccessResponse<BoardResponse.BoardPreViewListDTO> getBoardList(){
         return null;
     }
 
@@ -37,7 +41,7 @@ public class BoardRestController {
     })
     public SuccessResponse<BoardResponse.BoardDetailDTO> getBoard(@PathVariable(name = "boardId") Long boardId){
 
-        return null;
+        return new SuccessResponse<>(boardQueryService.getBoardDetail(boardId));
     }
 
     @PostMapping("/")
