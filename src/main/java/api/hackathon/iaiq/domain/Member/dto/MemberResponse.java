@@ -17,5 +17,8 @@ public class MemberResponse {
 
         private Long memberId;
         private LocalDateTime lastModified;
+    public static class ProfileDTO {
+        private String nickname;
+        private String profileUrl;
     }
 }
