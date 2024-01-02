@@ -87,7 +87,7 @@ public class QuestionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "답변 삭제 성공",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = SearchCondition.class)))
+                            schema = @Schema(implementation = Long.class)))
     })
     @DeleteMapping("/answer")
     public SuccessResponse<Long> delete(@RequestBody SearchCondition searchCondition) {

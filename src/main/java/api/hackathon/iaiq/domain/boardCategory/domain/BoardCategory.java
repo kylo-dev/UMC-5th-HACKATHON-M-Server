@@ -20,6 +20,7 @@ public class BoardCategory {
 
     private String topic;
 
+    @Builder.Default
     @OneToMany(mappedBy = "boardCategory")
     private List<Board> boardList = new ArrayList<>();
 
