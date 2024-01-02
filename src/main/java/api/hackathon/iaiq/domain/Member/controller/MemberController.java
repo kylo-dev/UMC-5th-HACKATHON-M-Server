@@ -23,7 +23,7 @@ public class MemberController {
     private final MemberQueryService memberQueryService;
     private final MemberCommandService memberCommandService;
 
-    @GetMapping("/")
+    @GetMapping()
     @Operation(summary = "프로필 조회", description = "로그인 한 사용자의 프로필을 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
@@ -32,7 +32,7 @@ public class MemberController {
         return new SuccessResponse<>(memberQueryService.getProfile());
     }
 
-    @PatchMapping("/")
+    @PatchMapping()
     @Operation(summary = "사용자 프로필 닉네임 변경", description = "사용자 프로필 닉네임을 수정하는 API입니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")

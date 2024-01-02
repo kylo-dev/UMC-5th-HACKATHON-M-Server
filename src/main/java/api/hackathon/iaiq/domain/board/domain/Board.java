@@ -37,11 +37,5 @@ public class Board extends BaseTimeEntity {
         this.boardCategory = boardCategory;
     }
 
-    //== 연관관계 편의 메소드 ==//
-    public void writeMember(Member member){
-        this.member = member;
-        Hibernate.initialize(member.getBoardList());
-        member.getBoardList().add(this);
-    }
 }
 
