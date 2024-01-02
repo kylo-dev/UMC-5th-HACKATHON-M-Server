@@ -20,7 +20,6 @@ public class BoardCategory {
 
     private String topic;
 
-
     @OneToMany(mappedBy = "boardCategory")
     private List<Board> boardList = new ArrayList<>();
 }

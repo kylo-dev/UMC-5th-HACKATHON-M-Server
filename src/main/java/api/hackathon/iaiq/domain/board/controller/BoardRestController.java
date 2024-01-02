@@ -1,9 +1,9 @@
 package api.hackathon.iaiq.domain.board.controller;
 
 import api.hackathon.iaiq.domain.board.domain.Board;
+import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
-import api.hackathon.iaiq.domain.board.service.BoardCommandService;
 import api.hackathon.iaiq.domain.board.service.BoardQueryService;
 import api.hackathon.iaiq.global.success.SuccessResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -13,6 +13,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "board", description = "커뮤니티 게시글 API")
@@ -22,13 +23,18 @@ import org.springframework.web.bind.annotation.*;
 public class BoardRestController {
 
     private final BoardQueryService boardQueryService;
+
     @GetMapping("/")
-    @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티에 작성된 모든 글의 목록을 조회하는 API입니다.")
+    @Operation(summary = "커뮤니티 게시글 조회", description = "커뮤니티에 작성된 모든 글의 목록을 조회하는 API이며, 페이징을 포함, query string으로 page 번호 전달해 주세요.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
-    public SuccessResponse<BoardResponse.BoardPreViewListDTO> getBoardList(){
-        return null;
+    @Parameters({
+            @Parameter(name = "page", description = "커뮤니티 게시글의 페이지 번호, query sring으로 전달해주세요.")
+    })
+    public SuccessResponse<BoardResponse.BoardPreViewListDTO> getBoardList(@RequestParam(name = "page") Integer page){
+        Page<Board> boardPreViewList = boardQueryService.getBoardPreViewList(page);
+        return new SuccessResponse<>(BoardConverter.toBoardPreViewListDTO(boardPreViewList));
     }
 
     @GetMapping("/{boardId}")
