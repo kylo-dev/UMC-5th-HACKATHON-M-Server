@@ -40,3 +40,5 @@ application.yml
 application.properties
 
 .DS_Store
+
+main/generated/**

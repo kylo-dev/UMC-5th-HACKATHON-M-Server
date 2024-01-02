@@ -37,6 +37,13 @@ public enum ErrorType {
     _USER_NOT_FOUND_DB(NOT_FOUND, "USER_4041", "존재하지 않는 회원입니다."),
 
 
+    // ------------------------------------------ CATEGORY ------------------------------------------
+
+    _CATEGORY_INVALID_REQUEST(BAD_REQUEST, "CATEGORY_4000", "잘못된 카테고리 입니다."),
+
+
+    // ------------------------------------------ Search Condition ------------------------------------------
+    _DATE_INVALID_REQUEST(BAD_REQUEST, "Search_4000", "잘못된 날짜입니다."),
     ;
 
     private final HttpStatus status;
