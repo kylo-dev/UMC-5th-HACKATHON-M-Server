@@ -27,7 +27,7 @@ public class BoardResponse {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class BoardPreVieListDTO {
+    public static class BoardPreViewListDTO {
         List<BoardPreViewDTO> boardList;
         Integer listSize;
         Integer totalPage;
