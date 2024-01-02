@@ -1,6 +1,7 @@
 package api.hackathon.iaiq.domain.question.service;
 
 import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerRequest;
+import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerListResponse;
 import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerResponse;
 import api.hackathon.iaiq.domain.question.domain.Category;
 import api.hackathon.iaiq.domain.question.domain.Question;
@@ -10,6 +11,7 @@ import api.hackathon.iaiq.domain.question.repository.QuestionRepository;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,5 +41,13 @@ public class QuestionService {
 
     public Long delete(Long answerId) {
         return answerId;
+    }
+
+    public AnswerResponse findById(Long answerId) {
+        return null;
+    }
+
+    public AnswerListResponse findPaging(Pageable pageable) {
+        return null;
     }
 }
