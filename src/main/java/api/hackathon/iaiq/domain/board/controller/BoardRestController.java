@@ -84,7 +84,7 @@ public class BoardRestController {
             @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
     })
     public SuccessResponse<BoardResponse.BoardResultDTO> deleteBoard(@PathVariable(name = "boardId") Long boardId) {
-
-        return null;
+        boardCommandService.deleteBoard(boardId);
+        return new SuccessResponse<>(BoardConverter.toBoardResultDTO(boardId));
     }
 }

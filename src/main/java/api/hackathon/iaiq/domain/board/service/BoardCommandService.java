@@ -47,4 +47,10 @@ public class BoardCommandService {
 
         return BoardConverter.toBoardEditResultDTO(updateBoard);
     }
+
+    // 게시글 삭제
+    public void deleteBoard(Long boardId) {
+        boardRepository.findById(boardId).orElseThrow(()-> new ApiException(ErrorType._BOARD_NOT_FOUND));
+        boardRepository.deleteById(boardId);
+    }
 }
