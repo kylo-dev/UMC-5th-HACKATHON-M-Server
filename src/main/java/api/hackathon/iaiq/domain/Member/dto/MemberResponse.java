@@ -17,6 +17,12 @@ public class MemberResponse {
 
         private Long memberId;
         private LocalDateTime lastModified;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class ProfileDTO {
         private String nickname;
         private String profileUrl;

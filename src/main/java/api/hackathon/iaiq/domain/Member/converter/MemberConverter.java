@@ -9,6 +9,9 @@ public class MemberConverter {
         return MemberResponse.ProfileEditDTO.builder()
                 .memberId(member.getId())
                 .lastModified(member.getLastModifiedDate())
+                .build();
+    }
+
     public static MemberResponse.ProfileDTO toProfileDTO(Member member) {
         return MemberResponse.ProfileDTO.builder()
                 .profileUrl(member.getProfileImgUrl())
