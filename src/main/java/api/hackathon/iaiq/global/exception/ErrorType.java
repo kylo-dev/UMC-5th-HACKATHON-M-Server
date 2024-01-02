@@ -41,6 +41,9 @@ public enum ErrorType {
 
     _CATEGORY_INVALID_REQUEST(BAD_REQUEST, "CATEGORY_4000", "잘못된 카테고리 입니다."),
 
+
+    // ------------------------------------------ Search Condition ------------------------------------------
+    _DATE_INVALID_REQUEST(BAD_REQUEST, "Search_4000", "잘못된 날짜입니다."),
     ;
 
     private final HttpStatus status;

@@ -1,7 +1,8 @@
 package api.hackathon.iaiq.domain.question.service;
 
-import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerRequest;
-import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerListResponse;
+import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerCreateRequest;
+import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerEditRequest;
+import api.hackathon.iaiq.domain.question.answer.dto.request.SearchCondition;
 import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerResponse;
 import api.hackathon.iaiq.domain.question.domain.Category;
 import api.hackathon.iaiq.domain.question.domain.Question;
@@ -11,7 +12,6 @@ import api.hackathon.iaiq.domain.question.repository.QuestionRepository;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -31,23 +31,20 @@ public class QuestionService {
                 .build();
     }
 
-    public AnswerResponse register(AnswerRequest answerRequest) {
+    public AnswerResponse register(AnswerCreateRequest answerCreateRequest) {
         return null;
     }
 
-    public AnswerResponse edit(Long answerId, AnswerRequest answerRequest) {
+    public AnswerResponse edit(AnswerEditRequest answerEditRequest) {
         return null;
     }
 
-    public Long delete(Long answerId) {
-        return answerId;
-    }
-
-    public AnswerResponse findById(Long answerId) {
+    public SearchCondition delete(SearchCondition searchCondition) {
         return null;
     }
 
-    public AnswerListResponse findPaging(Pageable pageable) {
+    public AnswerResponse findByCondition(SearchCondition searchCondition) {
         return null;
     }
+
 }

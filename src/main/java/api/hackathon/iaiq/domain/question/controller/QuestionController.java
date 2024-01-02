@@ -1,7 +1,8 @@
 package api.hackathon.iaiq.domain.question.controller;
 
-import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerRequest;
-import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerListResponse;
+import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerEditRequest;
+import api.hackathon.iaiq.domain.question.answer.dto.request.AnswerCreateRequest;
+import api.hackathon.iaiq.domain.question.answer.dto.request.SearchCondition;
 import api.hackathon.iaiq.domain.question.answer.dto.response.AnswerResponse;
 import api.hackathon.iaiq.domain.question.dto.request.QuestionRequest;
 import api.hackathon.iaiq.domain.question.dto.request.QuestionResponse;
@@ -13,7 +14,6 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,28 +43,16 @@ public class QuestionController {
         return new SuccessResponse<>(response);
     }
 
-    @Operation(summary = "질문에 대한 답 조회", description = "질문에 대한 답을 페이징처리하여 조회합니다.")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "답변 조회 성공",
-                    content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = AnswerListResponse.class)))
-    })
-    @GetMapping("/answer")
-    public SuccessResponse<AnswerListResponse> find(Pageable pageable) {
-        AnswerListResponse response = questionService.findPaging(pageable);
-        return new SuccessResponse<>(response);
-    }
 
-
-    @Operation(summary = "질문에 대한 답 단건 조회", description = "질문에 대한 답을 단건 조회합니다.")
+    @Operation(summary = "질문에 대한 답 단건 조회", description = "날짜로 질문에 대한 답을 단건 조회합니다.")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "답변 단건 조회 성공",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
                             schema = @Schema(implementation = AnswerResponse.class)))
     })
-    @GetMapping("/answer/{answerId}")
-    public SuccessResponse<AnswerResponse> find(@PathVariable Long answerId) {
-        AnswerResponse response = questionService.findById(answerId);
+    @GetMapping("/answer")
+    public SuccessResponse<AnswerResponse> find(@RequestBody SearchCondition searchCondition) {
+        AnswerResponse response = questionService.findByCondition(searchCondition);
         return new SuccessResponse<>(response);
     }
 
@@ -76,8 +64,8 @@ public class QuestionController {
                             schema = @Schema(implementation = AnswerResponse.class)))
     })
     @PostMapping("/answer")
-    public SuccessResponse<AnswerResponse> register(@RequestBody AnswerRequest answerRequest) {
-        AnswerResponse response = questionService.register(answerRequest);
+    public SuccessResponse<AnswerResponse> register(@RequestBody AnswerCreateRequest answerCreateRequest) {
+        AnswerResponse response = questionService.register(answerCreateRequest);
         return new SuccessResponse<>(response);
     }
 
@@ -89,9 +77,8 @@ public class QuestionController {
                             schema = @Schema(implementation = AnswerResponse.class)))
     })
     @PatchMapping("/answer/{answerId}")
-    public SuccessResponse<AnswerResponse> edit(@PathVariable Long answerId,
-                                                @RequestBody AnswerRequest answerRequest) {
-        AnswerResponse response = questionService.edit(answerId, answerRequest);
+    public SuccessResponse<AnswerResponse> edit(@RequestBody AnswerEditRequest answerEditRequest) {
+        AnswerResponse response = questionService.edit(answerEditRequest);
         return new SuccessResponse<>(response);
     }
 
@@ -100,11 +87,11 @@ public class QuestionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "답변 삭제 성공",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = Long.class)))
+                            schema = @Schema(implementation = SearchCondition.class)))
     })
-    @DeleteMapping("/answer/{answerId}")
-    public SuccessResponse<Long> delete(@PathVariable Long answerId) {
-        Long deleteId = questionService.delete(answerId);
-        return new SuccessResponse<>(deleteId);
+    @DeleteMapping("/answer")
+    public SuccessResponse<SearchCondition> delete(@RequestBody SearchCondition searchCondition) {
+        SearchCondition condition = questionService.delete(searchCondition);
+        return new SuccessResponse<>(condition);
     }
 }
