@@ -1,6 +1,6 @@
 package api.hackathon.iaiq.domain.question.domain;
 
-import api.hackathon.iaiq.domain.answer.domain.Answer;
+import api.hackathon.iaiq.domain.question.answer.domain.Answer;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;

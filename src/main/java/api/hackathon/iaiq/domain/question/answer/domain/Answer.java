@@ -1,4 +1,4 @@
-package api.hackathon.iaiq.domain.answer.domain;
+package api.hackathon.iaiq.domain.question.answer.domain;
 
 
 import api.hackathon.iaiq.domain.question.domain.Question;

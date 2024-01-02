@@ -1,4 +1,4 @@
-package api.hackathon.iaiq.domain.answer.dto.request;
+package api.hackathon.iaiq.domain.question.answer.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
