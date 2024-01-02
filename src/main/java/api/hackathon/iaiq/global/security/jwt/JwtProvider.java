@@ -92,8 +92,8 @@ public class JwtProvider {
 
     // token 으로부터 유저 정보 확인
     private Member getEmail(final String jwtToken) {
-        Long userId = Long.valueOf(getUserIdFromToken(jwtToken));
-        return memberRepository.findById(userId)
+        String email = getUserIdFromToken(jwtToken);
+        return memberRepository.findMemberByEmail(email)
                 .orElseThrow(() -> new ApiException(_USER_NOT_FOUND_BY_TOKEN));
     }
 

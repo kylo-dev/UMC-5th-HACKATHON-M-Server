@@ -1,17 +1,18 @@
 package api.hackathon.iaiq.domain.board.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import api.hackathon.iaiq.domain.Member.domain.Member;
+import api.hackathon.iaiq.domain.base.BaseTimeEntity;
+import api.hackathon.iaiq.domain.boardCategory.domain.BoardCategory;
+import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.Hibernate;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Builder
-public class Board {
+public class Board extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,5 +21,27 @@ public class Board {
     private String title;
 
     private String content;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "board_category_id")
+    private BoardCategory boardCategory;
+
+
+    public void update(String title, String content, BoardCategory boardCategory) {
+        this.title =title;
+        this.content = content;
+        this.boardCategory = boardCategory;
+    }
+
+    //== 연관관계 편의 메소드 ==//
+    public void writeMember(Member member){
+        this.member = member;
+        Hibernate.initialize(member.getBoardList());
+        member.getBoardList().add(this);
+    }
 }
 
