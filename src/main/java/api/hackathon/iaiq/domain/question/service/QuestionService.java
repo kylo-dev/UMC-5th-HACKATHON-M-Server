@@ -1,5 +1,7 @@
 package api.hackathon.iaiq.domain.question.service;
 
+import api.hackathon.iaiq.domain.answer.dto.request.AnswerRequest;
+import api.hackathon.iaiq.domain.answer.dto.response.AnswerResponse;
 import api.hackathon.iaiq.domain.question.domain.Category;
 import api.hackathon.iaiq.domain.question.domain.Question;
 import api.hackathon.iaiq.domain.question.dto.request.QuestionRequest;
@@ -25,5 +27,9 @@ public class QuestionService {
         return QuestionResponse.builder()
                 .question(question)
                 .build();
+    }
+
+    public AnswerResponse register(AnswerRequest answerRequest) {
+        return null;
     }
 }
