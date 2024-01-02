@@ -38,6 +38,8 @@ public enum ErrorType {
 
     // ------------------------------------------ Board ------------------------------------------
     _BOARD_NOT_FOUND(NOT_FOUND, "BOARD_4001", "존재하지 않는 게시글 입니다."),
+    _NOT_BOARD_AUTHOR(NOT_FOUND, "BOARD_4002", "작성자가 아니므로 삭제할 수 없습니다."),
+
     // ---------------------------------------- JWT TOKEN ----------------------------------------
     _JWT_PARSING_ERROR(BAD_REQUEST, "JWT_4001", "JWT 토큰 파싱 중 오류가 발생했습니다."),
     _JWT_EXPIRED(UNAUTHORIZED, "JWT_4010", "Jwt Token의 유효 기간이 만료되었습니다."),

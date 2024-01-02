@@ -12,6 +12,7 @@ import api.hackathon.iaiq.domain.boardCategory.domain.BoardCategory;
 import api.hackathon.iaiq.domain.boardCategory.repository.BoardCategoryRepository;
 import api.hackathon.iaiq.global.exception.ApiException;
 import api.hackathon.iaiq.global.exception.ErrorType;
+import api.hackathon.iaiq.global.utils.SecurityUtil;
 import jakarta.persistence.EntityManager;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -41,10 +42,18 @@ public class BoardCommandService {
     }
 
     //게시글 수정
-    public BoardResponse.BoardEditResultDTO editBoard(Long boardId, BoardRequest.BoardEditDTO boardEditDTO) {
+    public BoardResponse.BoardEditResultDTO editBoard(Long boardId,BoardRequest.BoardEditDTO boardEditDTO) {
         Board board = boardRepository.findById(boardId).orElseThrow(()-> new ApiException(ErrorType._BOARD_NOT_FOUND));
         BoardCategory boardCategory = boardCategoryRepository.findByTopic(boardEditDTO.getTopic()).orElseThrow(()-> new ApiException(ErrorType._BOARD_CATEGORY_NOT_FOUND));
 
+
+        //작성자인지 확인
+        Member currentMember = SecurityUtil.getCurrentMember();
+
+        if(!currentMember.getId().equals(board.getMember().getId()))
+            throw new ApiException(ErrorType._NOT_BOARD_AUTHOR);
+
+        //게시글 업데이트
         board.update(boardEditDTO.getTitle(),boardEditDTO.getContent(), boardCategory);
 
         em.flush();
@@ -57,7 +66,14 @@ public class BoardCommandService {
 
     // 게시글 삭제
     public BoardResponse.BoardResultDTO deleteBoard(Long boardId) {
-        boardRepository.findById(boardId).orElseThrow(()-> new ApiException(ErrorType._BOARD_NOT_FOUND));
+        Board board = boardRepository.findById(boardId).orElseThrow(()-> new ApiException(ErrorType._BOARD_NOT_FOUND));
+
+        //작성자인지 확인
+        Member currentMember = SecurityUtil.getCurrentMember();
+        if(!currentMember.getId().equals(board.getMember().getId()))
+            throw new ApiException(ErrorType._NOT_BOARD_AUTHOR);
+        
+        //게시글 삭제
         boardRepository.deleteById(boardId);
         return BoardConverter.toBoardResultDTO(boardId);
     }
