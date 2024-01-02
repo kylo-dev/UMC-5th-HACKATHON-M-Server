@@ -28,6 +28,13 @@ public class BoardConverter {
                 .build();
     }
 
+    public static BoardResponse.BoardResultDTO toBoardResultDTO(Long boardId){
+        return BoardResponse.BoardResultDTO.builder()
+                .boardId(boardId)
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
+
     // Page<Board> -> Page<BoardPreViewListDTO>로 변환 함수
     public static BoardResponse.BoardPreViewListDTO toBoardPreViewListDTO(Page<Board> boards) {
 
