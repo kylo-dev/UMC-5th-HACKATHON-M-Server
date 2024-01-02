@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AccessToken;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
@@ -26,13 +27,13 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         OAuth2User oAuth2User = super.loadUser(request);
         log.info("------------------ getAttributes : {}", oAuth2User.getAttributes());
 
-        String provider = request.getClientRegistration().getRegistrationId();
+        OAuth2AccessToken accessToken = request.getAccessToken();
 
         ///kakao user
         KakaoUserInfo kakaoUserInfo = new KakaoUserInfo(oAuth2User.getAttributes());
 
         // 회원가입 유무 확인
-        Optional<Member> member = memberRepository.findMemberByEmailAndProvider(kakaoUserInfo.getEmail(), provider);
+        Optional<Member> member = memberRepository.findMemberByEmail(kakaoUserInfo.getEmail());
 
         // 없다면 회원가입
         if(member.isEmpty()) {
