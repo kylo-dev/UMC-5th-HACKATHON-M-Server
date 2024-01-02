@@ -27,7 +27,7 @@ public class BoardResponse {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class BoardPreVieListDTO {
+    public static class BoardPreViewListDTO {
         List<BoardPreViewDTO> boardList;
         Integer listSize;
         Integer totalPage;
@@ -62,11 +62,9 @@ public class BoardResponse {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class BoardEditDTO {
-        private String topic;
-        private String title;
-        private String content;
-        private LocalDateTime createdAt;
+    public static class BoardEditResultDTO {
+        private Long boardId;
+        private LocalDateTime lastModified;
     }
 
 }

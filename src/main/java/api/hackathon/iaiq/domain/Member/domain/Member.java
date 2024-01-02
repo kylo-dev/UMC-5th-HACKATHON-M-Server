@@ -1,7 +1,11 @@
 package api.hackathon.iaiq.domain.Member.domain;
 
+import api.hackathon.iaiq.domain.board.domain.Board;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -22,4 +26,7 @@ public class Member {
 
     @Column
     private String profileImgUrl;
+
+    @OneToMany(mappedBy = "member")
+    private List<Board> boardList = new ArrayList<>();
 }

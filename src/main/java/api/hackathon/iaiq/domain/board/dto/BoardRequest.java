@@ -14,7 +14,7 @@ public class BoardRequest {
         @Schema(description = "주제")
         private String topic;
 
-        @Schema(description = "게시글 주제")
+        @Schema(description = "게시글 제목")
         private String title;
 
         @Schema(description = "게시글 내용")
@@ -23,7 +23,7 @@ public class BoardRequest {
 
     @Schema(description = "게시글 수정 DTO")
     @Getter
-    public static class EditDTO {
+    public static class BoardEditDTO {
 
         @Schema(description = "주제")
         private String topic;
@@ -33,8 +33,5 @@ public class BoardRequest {
 
         @Schema(description = "게시글 내용")
         private String content;
-
-        @Schema(description = "게시글 작성 날짜")
-        private LocalDateTime createdAt;
     }
 }
