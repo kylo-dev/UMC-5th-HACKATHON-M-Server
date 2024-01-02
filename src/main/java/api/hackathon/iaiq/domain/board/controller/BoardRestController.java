@@ -1,8 +1,5 @@
 package api.hackathon.iaiq.domain.board.controller;
 
-import api.hackathon.iaiq.domain.Member.domain.Member;
-import api.hackathon.iaiq.domain.board.domain.Board;
-import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
 import api.hackathon.iaiq.domain.board.service.BoardCommandService;
@@ -15,10 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
-
-import static api.hackathon.iaiq.global.utils.SecurityUtil.getCurrentMember;
 
 @Tag(name = "board", description = "커뮤니티 게시글 API")
 @RestController

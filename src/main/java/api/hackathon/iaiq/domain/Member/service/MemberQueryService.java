@@ -19,4 +19,5 @@ public class MemberQueryService {
         return memberRepository.findById(memberId).orElseThrow(
                 () -> new ApiException(ErrorType._USER_NOT_FOUND_DB));
     }
+
 }
