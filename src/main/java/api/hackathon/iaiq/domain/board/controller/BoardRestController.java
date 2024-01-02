@@ -35,8 +35,7 @@ public class BoardRestController {
             @Parameter(name = "page", description = "커뮤니티 게시글의 페이지 번호, query sring으로 전달해주세요.")
     })
     public SuccessResponse<BoardResponse.BoardPreViewListDTO> getBoardList(@RequestParam(name = "page") Integer page){
-        Page<Board> boardPreViewList = boardQueryService.getBoardPreViewList(page);
-        return new SuccessResponse<>(BoardConverter.toBoardPreViewListDTO(boardPreViewList));
+        return new SuccessResponse<>(boardQueryService.getBoardPreViewList(page));
     }
 
     @GetMapping("/{boardId}")
@@ -58,8 +57,7 @@ public class BoardRestController {
             @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
     })
     public SuccessResponse<BoardResponse.BoardResultDTO> writeBoard(@RequestBody BoardRequest.WriteDTO request) {
-        Board board = boardCommandService.writeBoard(request);
-        return new SuccessResponse<>(BoardConverter.toBoardResultDTO(board));
+        return new SuccessResponse<>(boardCommandService.writeBoard(request));
     }
 
     @PatchMapping("/{boardId}/edit")
@@ -84,7 +82,6 @@ public class BoardRestController {
             @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
     })
     public SuccessResponse<BoardResponse.BoardResultDTO> deleteBoard(@PathVariable(name = "boardId") Long boardId) {
-        boardCommandService.deleteBoard(boardId);
-        return new SuccessResponse<>(BoardConverter.toBoardResultDTO(boardId));
+        return new SuccessResponse<>(boardCommandService.deleteBoard(boardId));
     }
 }

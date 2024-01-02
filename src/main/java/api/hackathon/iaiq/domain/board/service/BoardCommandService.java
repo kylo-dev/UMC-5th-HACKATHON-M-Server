@@ -26,11 +26,12 @@ public class BoardCommandService {
     private final BoardCategoryRepository boardCategoryRepository;
 
     // 게시글 작성 로직
-    public Board writeBoard(BoardRequest.WriteDTO request) {
+    public BoardResponse.BoardResultDTO writeBoard(BoardRequest.WriteDTO request) {
         BoardCategory boardCategory = boardCategoryRepository.findByTopic(request.getTopic()).orElseThrow(()-> new ApiException(ErrorType._BOARD_CATEGORY_NOT_FOUND));
 
         Board newBoard = BoardConverter.toBoard(request, boardCategory);
-        return boardRepository.save(newBoard);
+        boardRepository.save(newBoard);
+        return BoardConverter.toBoardResultDTO(newBoard);
     }
 
     //게시글 수정
@@ -49,8 +50,9 @@ public class BoardCommandService {
     }
 
     // 게시글 삭제
-    public void deleteBoard(Long boardId) {
+    public BoardResponse.BoardResultDTO deleteBoard(Long boardId) {
         boardRepository.findById(boardId).orElseThrow(()-> new ApiException(ErrorType._BOARD_NOT_FOUND));
         boardRepository.deleteById(boardId);
+        return BoardConverter.toBoardResultDTO(boardId);
     }
 }

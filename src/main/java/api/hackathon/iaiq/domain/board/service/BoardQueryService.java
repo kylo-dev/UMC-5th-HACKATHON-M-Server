@@ -35,7 +35,8 @@ public class BoardQueryService {
     /*
     게시글 전체 조회(페이징)
      */
-    public Page<Board> getBoardPreViewList(Integer page){
-        return boardRepository.findAll(PageRequest.of(page, 10));
+    public BoardResponse.BoardPreViewListDTO getBoardPreViewList(Integer page){
+        Page<Board> boards = boardRepository.findAll(PageRequest.of(page, 10));
+        return BoardConverter.toBoardPreViewListDTO(boards);
     }
 }
