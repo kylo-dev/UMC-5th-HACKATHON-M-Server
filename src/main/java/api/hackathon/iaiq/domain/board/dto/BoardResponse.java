@@ -44,6 +44,7 @@ public class BoardResponse {
     public static class BoardDetailDTO {
         private String nickname;
         private String profileUrl;
+        private String topic;
         private String title;
         private String content;
     }
