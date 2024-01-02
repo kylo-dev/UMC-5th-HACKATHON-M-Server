@@ -51,6 +51,19 @@ public class BoardRestController {
         return new SuccessResponse<>(boardQueryService.getBoardDetail(boardId));
     }
 
+    @GetMapping("/{memberId}")
+    @Operation(summary = "로그인한 사용자의 커뮤니티 모든 게시글 조회", description = "로그인한 사용자의 커뮤니티에 모든 글을 조회하는 API입니다.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "COMMON200", description = "OK, 성공")
+    })
+    @Parameters({
+            @Parameter(name = "memberId", description = "사용자의 아이디, Path Variable입니다.")
+    })
+    public SuccessResponse<> getMemberOfBoard(@PathVariable(name = "memberId") Long memberId){
+
+        return new SuccessResponse<>(null);
+    }
+
     @PostMapping("/")
     @Operation(summary = "커뮤니티 게시글 작성", description = "커뮤니티에 글 작성하는 API입니다.")
     @ApiResponses(value = {
