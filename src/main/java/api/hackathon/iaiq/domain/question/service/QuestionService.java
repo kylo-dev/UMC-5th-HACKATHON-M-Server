@@ -14,6 +14,7 @@ import api.hackathon.iaiq.domain.question.dto.request.QuestionResponse;
 import api.hackathon.iaiq.domain.question.repository.QuestionRepository;
 import api.hackathon.iaiq.global.exception.ApiException;
 import api.hackathon.iaiq.global.exception.ErrorType;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -54,15 +55,13 @@ public class QuestionService {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         String formattedDate = now.format(formatter);
 
-        // ToDo Util에 있는 것으로 수정
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        Member member = (Member) authentication.getPrincipal();
+        Member currentMember = getCurrentMember();
 
         Answer newAnswer = Answer.builder()
                 .content(answerCreateRequest.getContent())
                 .question(question)
                 .formatDate(formattedDate)
-                .member(member)
+                .member(currentMember)
                 .build();
 
         answerService.register(newAnswer);
@@ -75,6 +74,12 @@ public class QuestionService {
         return answerResponse;
     }
 
+    private Member getCurrentMember() {
+        // ToDo Util에 있는 것으로 수정
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (Member) authentication.getPrincipal();
+    }
+
     public AnswerResponse edit(AnswerEditRequest answerEditRequest) {
         return null;
     }
@@ -85,7 +90,15 @@ public class QuestionService {
 
     public AnswerResponse findByCondition(SearchCondition searchCondition) {
         // 날짜와 생성자 이름으로 갖고 오면됨
-        return null;
+
+        Member currentMember = getCurrentMember();
+        Long memberId = currentMember.getId();
+
+        LocalDate localDate = searchCondition.getSearchDate();
+
+        AnswerResponse response = answerService.findByCondition(memberId, localDate);
+
+        return response;
     }
 
 }

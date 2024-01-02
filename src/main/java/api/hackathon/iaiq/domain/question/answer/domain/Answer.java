@@ -2,8 +2,8 @@ package api.hackathon.iaiq.domain.question.answer.domain;
 
 
 import api.hackathon.iaiq.domain.Member.domain.Member;
+import api.hackathon.iaiq.domain.base.BaseEntity;
 import api.hackathon.iaiq.domain.question.domain.Question;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -23,7 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Getter
-public class Answer {
+public class Answer extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
