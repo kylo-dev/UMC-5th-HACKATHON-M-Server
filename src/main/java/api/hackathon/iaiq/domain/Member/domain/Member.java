@@ -1,5 +1,6 @@
 package api.hackathon.iaiq.domain.Member.domain;
 
+import api.hackathon.iaiq.domain.base.BaseTimeEntity;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +13,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Member {
+public class Member extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,4 +30,8 @@ public class Member {
 
     @OneToMany(mappedBy = "member")
     private List<Board> boardList = new ArrayList<>();
+
+    public void updateNickname(String nickname){
+        this.nickname = nickname;
+    }
 }
