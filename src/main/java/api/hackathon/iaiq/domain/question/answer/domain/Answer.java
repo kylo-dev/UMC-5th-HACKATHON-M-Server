@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,9 @@ public class Answer {
 
     private String content;
 
-    @OneToOne(mappedBy = "answer", cascade = CascadeType.ALL)
+    @OneToOne
+    @JoinColumn(name = "question_id")
     private Question question;
+
+    private String formatDate;
 }

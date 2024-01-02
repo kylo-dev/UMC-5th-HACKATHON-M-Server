@@ -1,6 +1,7 @@
 package api.hackathon.iaiq.domain.question.domain;
 
 import api.hackathon.iaiq.domain.question.answer.domain.Answer;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -30,7 +31,6 @@ public class Question {
     @Enumerated(EnumType.ORDINAL)
     private Category qnaType;
 
-    @OneToOne
-    @JoinColumn(name = "answer_id")
+    @OneToOne(mappedBy = "question", cascade = CascadeType.ALL)
     private Answer answer;
 }
