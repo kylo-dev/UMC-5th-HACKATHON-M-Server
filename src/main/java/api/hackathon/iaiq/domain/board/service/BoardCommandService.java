@@ -22,8 +22,7 @@ public class BoardCommandService {
     // 게시글 작성 로직
     public Board writeBoard(BoardRequest.WriteDTO request) {
         BoardCategory boardCategory = boardCategoryRepository.findByTopic(request.getTopic());
-        Board newBoard = BoardConverter.toBoard(request);
-        newBoard.setBoardCategory(boardCategory);
+        Board newBoard = BoardConverter.toBoard(request, boardCategory);
         return boardRepository.save(newBoard);
     }
 }

@@ -3,6 +3,7 @@ package api.hackathon.iaiq.domain.board.converter;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
+import api.hackathon.iaiq.domain.boardCategory.domain.BoardCategory;
 import org.springframework.data.domain.Page;
 
 import java.time.LocalDateTime;
@@ -12,10 +13,11 @@ import java.util.stream.Collectors;
 public class BoardConverter {
 
     // WriteDTO -> Board 엔티티로 변환 함수
-    public static Board toBoard(BoardRequest.WriteDTO request){
+    public static Board toBoard(BoardRequest.WriteDTO request, BoardCategory boardCategory){
         return Board.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
+                .boardCategory(boardCategory)
                 .build();
     }
 

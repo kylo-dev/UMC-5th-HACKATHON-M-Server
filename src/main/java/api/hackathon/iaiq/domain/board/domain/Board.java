@@ -24,10 +24,5 @@ public class Board extends BaseTimeEntity {
     @JoinColumn(name = "board_category_id")
     private BoardCategory boardCategory;
 
-    //== 연관관계 편의 메소드 ==//
-    public void setBoardCategory(BoardCategory boardCategory){
-        this.boardCategory = boardCategory;
-        boardCategory.getBoardList().add(this);
-    }
 }
 
