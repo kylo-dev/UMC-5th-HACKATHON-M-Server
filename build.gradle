@@ -1,11 +1,11 @@
 plugins {
 	id 'java'
-	id 'org.springframework.boot' version '3.1.7'
+	id 'org.springframework.boot' version '3.0.12'
 	id 'io.spring.dependency-management' version '1.1.4'
 }
 
 group = 'api.hackathon'
-version = '0.0.1-SNAPSHOT'
+version = '0.1.0-DB'
 
 java {
 	sourceCompatibility = '17'
@@ -37,13 +37,12 @@ dependencies {
 	// oauth
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 
+	// SpringDoc for Spring MVC
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.3.0'
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.3.0'
 
-	// Swagger
-	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
-
-	implementation 'org.springdoc:springdoc-openapi-ui:1.6.15'
-	implementation 'io.springfox:springfox-swagger2:2.9.2'
-	implementation 'io.springfox:springfox-swagger-ui:2.9.2'
+	// SpringDoc for Spring WebFlux
+	implementation 'org.springdoc:springdoc-openapi-starter-webflux-ui:2.3.0'
 
 
 	//Querydsl 추가
@@ -51,6 +50,11 @@ dependencies {
 	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jakarta"
 	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
 	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+
+	// jwt
+	implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-impl:0.11.5'
+	runtimeOnly 'io.jsonwebtoken:jjwt-jackson:0.11.5'
 }
 
 tasks.named('bootBuildImage') {

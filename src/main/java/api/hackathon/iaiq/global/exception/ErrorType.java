@@ -38,9 +38,20 @@ public enum ErrorType {
 
     // ------------------------------------------ Board ------------------------------------------
     _BOARD_NOT_FOUND(NOT_FOUND, "BOARD_4001", "존재하지 않는 게시글 입니다."),
+    // ---------------------------------------- JWT TOKEN ----------------------------------------
+    _JWT_PARSING_ERROR(BAD_REQUEST, "JWT_4001", "JWT 토큰 파싱 중 오류가 발생했습니다."),
+    _JWT_EXPIRED(UNAUTHORIZED, "JWT_4010", "Jwt Token의 유효 기간이 만료되었습니다."),
+
+
+    // ------------------------------------------ CATEGORY ------------------------------------------
+
+    _CATEGORY_INVALID_REQUEST(BAD_REQUEST, "CATEGORY_4000", "잘못된 카테고리 입니다."),
 
     // ------------------------------------------ BoardCategory ------------------------------------------
     _BOARD_CATEGORY_NOT_FOUND(NOT_FOUND, "BOARD_CATEGORY_4001", "존재하지 않는 커뮤니티 주제입니다."),
+
+    // ------------------------------------------ Search Condition ------------------------------------------
+    _DATE_INVALID_REQUEST(BAD_REQUEST, "Search_4000", "잘못된 날짜입니다."),
     ;
 
     private final HttpStatus status;
