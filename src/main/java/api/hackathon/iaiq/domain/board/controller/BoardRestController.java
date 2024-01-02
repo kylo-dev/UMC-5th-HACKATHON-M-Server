@@ -1,7 +1,7 @@
 package api.hackathon.iaiq.domain.board.controller;
 
-import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.domain.Board;
+import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
 import api.hackathon.iaiq.domain.board.dto.BoardResponse;
 import api.hackathon.iaiq.domain.board.service.BoardCommandService;
@@ -49,7 +49,7 @@ public class BoardRestController {
     })
     public SuccessResponse<BoardResponse.BoardDetailDTO> getBoard(@PathVariable(name = "boardId") Long boardId){
 
-        return null;
+        return new SuccessResponse<>(boardQueryService.getBoardDetail(boardId));
     }
 
     @PostMapping("/")

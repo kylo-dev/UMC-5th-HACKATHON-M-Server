@@ -53,4 +53,14 @@ public class BoardConverter {
                 .content(board.getContent())
                 .build();
     }
+
+    public static BoardResponse.BoardDetailDTO toBoardDetailDTO(Board board) {
+        return BoardResponse.BoardDetailDTO.builder()
+                .nickname(null)//board.getMember().getNickname())
+                .profileUrl(null)//board.getMember().getProfileUrl()
+                .topic(board.getBoardCategory().getTopic())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .build();
+    }
 }

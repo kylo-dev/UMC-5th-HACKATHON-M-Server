@@ -36,6 +36,8 @@ public enum ErrorType {
     _UNAUTHORIZED(UNAUTHORIZED, "USER_4010", "로그인되지 않은 상태입니다."),
     _USER_NOT_FOUND_DB(NOT_FOUND, "USER_4041", "존재하지 않는 회원입니다."),
 
+    // ------------------------------------------ Board ------------------------------------------
+    _BOARD_NOT_FOUND(NOT_FOUND, "BOARD_4001", "존재하지 않는 게시글 입니다."),
 
     ;
 
