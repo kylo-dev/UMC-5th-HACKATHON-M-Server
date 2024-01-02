@@ -84,8 +84,16 @@ public class QuestionService {
         return null;
     }
 
-    public SearchCondition delete(SearchCondition searchCondition) {
-        return null;
+    public Long delete(SearchCondition searchCondition) {
+
+        Member currentMember = getCurrentMember();
+        Long memberId = currentMember.getId();
+
+        LocalDate localDate = searchCondition.getSearchDate();
+
+        Long deleteById = answerService.deleteByCondition(memberId, localDate);
+
+        return deleteById;
     }
 
     public AnswerResponse findByCondition(SearchCondition searchCondition) {

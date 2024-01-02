@@ -27,4 +27,12 @@ public class AnswerService {
 
         return response;
     }
+
+    public Long deleteByCondition(Long memberId, LocalDate localDate) {
+        Answer findAnswer = answerRepository.findByCondition(memberId, localDate);
+
+        answerRepository.delete(findAnswer);
+
+        return findAnswer.getId();
+    }
 }

@@ -90,8 +90,8 @@ public class QuestionController {
                             schema = @Schema(implementation = SearchCondition.class)))
     })
     @DeleteMapping("/answer")
-    public SuccessResponse<SearchCondition> delete(@RequestBody SearchCondition searchCondition) {
-        SearchCondition condition = questionService.delete(searchCondition);
-        return new SuccessResponse<>(condition);
+    public SuccessResponse<Long> delete(@RequestBody SearchCondition searchCondition) {
+        Long deleteId = questionService.delete(searchCondition);
+        return new SuccessResponse<>(deleteId);
     }
 }
