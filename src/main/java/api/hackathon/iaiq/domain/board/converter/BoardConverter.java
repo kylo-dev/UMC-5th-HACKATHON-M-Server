@@ -56,8 +56,8 @@ public class BoardConverter {
     public static BoardResponse.BoardPreViewDTO toBoardPreViewDTO(Board board) {
         return BoardResponse.BoardPreViewDTO.builder()
                 .topic(board.getBoardCategory().getTopic())
-                .nickname(null) // member 연결시 추가
-                .profileUrl(null) // member 연결시 추가
+                .nickname(board.getMember().getNickname())
+                .profileUrl(board.getMember().getProfileImgUrl())
                 .title(board.getTitle())
                 .content(board.getContent())
                 .build();
@@ -65,8 +65,8 @@ public class BoardConverter {
 
     public static BoardResponse.BoardDetailDTO toBoardDetailDTO(Board board) {
         return BoardResponse.BoardDetailDTO.builder()
-                .nickname(null)//board.getMember().getNickname())
-                .profileUrl(null)//board.getMember().getProfileUrl()
+                .nickname(board.getMember().getNickname())
+                .profileUrl(board.getMember().getProfileImgUrl())
                 .topic(board.getBoardCategory().getTopic())
                 .title(board.getTitle())
                 .content(board.getContent())

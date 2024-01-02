@@ -11,10 +11,13 @@ public class BoardRequest {
     @Getter
     public static class WriteDTO{
 
+        @Schema(description = "사용자 아이디")
+        private Long memberId;
+
         @Schema(description = "주제")
         private String topic;
 
-        @Schema(description = "게시글 주제")
+        @Schema(description = "게시글 제목")
         private String title;
 
         @Schema(description = "게시글 내용")

@@ -1,6 +1,8 @@
 package api.hackathon.iaiq.domain.board.service;
 
 
+import api.hackathon.iaiq.domain.Member.domain.Member;
+import api.hackathon.iaiq.domain.Member.service.MemberQueryService;
 import api.hackathon.iaiq.domain.board.converter.BoardConverter;
 import api.hackathon.iaiq.domain.board.domain.Board;
 import api.hackathon.iaiq.domain.board.dto.BoardRequest;
@@ -24,12 +26,16 @@ public class BoardCommandService {
 
     private final BoardRepository boardRepository;
     private final BoardCategoryRepository boardCategoryRepository;
+    private final MemberQueryService memberQueryService;
 
     // 게시글 작성 로직
     public BoardResponse.BoardResultDTO writeBoard(BoardRequest.WriteDTO request) {
         BoardCategory boardCategory = boardCategoryRepository.findByTopic(request.getTopic()).orElseThrow(()-> new ApiException(ErrorType._BOARD_CATEGORY_NOT_FOUND));
-
         Board newBoard = BoardConverter.toBoard(request, boardCategory);
+
+        // 작성자 회원 조회
+        Member writer = memberQueryService.findById(request.getMemberId());
+        newBoard.writeMember(writer);
         boardRepository.save(newBoard);
         return BoardConverter.toBoardResultDTO(newBoard);
     }

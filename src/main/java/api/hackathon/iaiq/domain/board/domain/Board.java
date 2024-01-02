@@ -1,5 +1,6 @@
 package api.hackathon.iaiq.domain.board.domain;
 
+import api.hackathon.iaiq.domain.Member.domain.Member;
 import api.hackathon.iaiq.domain.base.BaseTimeEntity;
 import api.hackathon.iaiq.domain.boardCategory.domain.BoardCategory;
 import jakarta.persistence.*;
@@ -21,6 +22,10 @@ public class Board extends BaseTimeEntity {
     private String content;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "board_category_id")
     private BoardCategory boardCategory;
 
@@ -29,6 +34,12 @@ public class Board extends BaseTimeEntity {
         this.title =title;
         this.content = content;
         this.boardCategory = boardCategory;
+    }
+
+    //== 연관관계 편의 메소드 ==//
+    public void writeMember(Member member){
+        this.member = member;
+        member.getBoardList().add(this);
     }
 }
 
