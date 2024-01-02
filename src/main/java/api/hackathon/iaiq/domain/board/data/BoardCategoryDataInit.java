@@ -13,6 +13,7 @@ public class BoardCategoryDataInit {
     private final BoardCategoryRepository boardCategoryRepository;
 
     //@PostConstruct
+
     public void init() {
         String[] topics = {"가족", "사랑", "모험", "비밀", "희망", "도시", "숲", "바다", "여행", "음악",
                 "친구", "추억", "환상", "꿈", "우주", "시간", "마법", "기술", "미래", "과거",
