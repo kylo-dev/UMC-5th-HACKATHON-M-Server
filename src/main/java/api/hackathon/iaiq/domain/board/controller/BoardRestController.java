@@ -70,10 +70,9 @@ public class BoardRestController {
     @Parameters({
             @Parameter(name = "boardId", description = "게시글의 아이디, Path Variable입니다.")
     })
-    public SuccessResponse<BoardResponse.BoardResultDTO> editProcBoard(@PathVariable(name = "boardId") Long boardId,
-                                                                       @RequestBody BoardRequest.EditDTO request){
-
-        return null;
+    public SuccessResponse<BoardResponse.BoardEditResultDTO> editBoard(@PathVariable(name = "boardId") Long boardId,
+                                                                       @RequestBody BoardRequest.BoardEditDTO request){
+        return new SuccessResponse<>(boardCommandService.editBoard(boardId,request));
     }
 
     @DeleteMapping("/{boardId}")

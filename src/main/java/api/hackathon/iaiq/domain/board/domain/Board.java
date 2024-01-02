@@ -24,5 +24,11 @@ public class Board extends BaseTimeEntity {
     @JoinColumn(name = "board_category_id")
     private BoardCategory boardCategory;
 
+
+    public void update(String title, String content, BoardCategory boardCategory) {
+        this.title =title;
+        this.content = content;
+        this.boardCategory = boardCategory;
+    }
 }
 

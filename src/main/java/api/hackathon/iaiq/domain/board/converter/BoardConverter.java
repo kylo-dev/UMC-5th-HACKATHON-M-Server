@@ -65,4 +65,11 @@ public class BoardConverter {
                 .content(board.getContent())
                 .build();
     }
+
+    public static BoardResponse.BoardEditResultDTO toBoardEditResultDTO(Board board) {
+        return BoardResponse.BoardEditResultDTO.builder()
+                .boardId(board.getId())
+                .lastModified(board.getLastModifiedDate())
+                .build();
+    }
 }

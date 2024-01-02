@@ -39,6 +39,8 @@ public enum ErrorType {
     // ------------------------------------------ Board ------------------------------------------
     _BOARD_NOT_FOUND(NOT_FOUND, "BOARD_4001", "존재하지 않는 게시글 입니다."),
 
+    // ------------------------------------------ Board Category------------------------------------------
+    _BOARD_CATEGORY_NOT_FOUND(NOT_FOUND, "BOARD_CATEGORY_4001", "존재하지 않는 커뮤니티 주제입니다."),
     ;
 
     private final HttpStatus status;
