@@ -7,7 +7,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 public class QuestionRequest {
 
-    @Schema(description = "카테고리 종류", example = "9가지 중 하나")
+    @Schema(description = "카테고리 종류",
+            example = "TRAVEL or FOOD or BOOK or MOVIES_DRAMAS or HEALTH_EXERCISE or MUSIC or DATING or CAREER or LIFE")
     private String category;
 
     public Category getCategory() {

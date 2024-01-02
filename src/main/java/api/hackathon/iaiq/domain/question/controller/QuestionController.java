@@ -74,12 +74,12 @@ public class QuestionController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "답변 수정 성공",
                     content = @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
-                            schema = @Schema(implementation = AnswerResponse.class)))
+                            schema = @Schema(implementation = Long.class)))
     })
     @PatchMapping("/answer")
-    public SuccessResponse<AnswerResponse> edit(@RequestBody AnswerEditRequest answerEditRequest) {
-        AnswerResponse response = questionService.edit(answerEditRequest);
-        return new SuccessResponse<>(response);
+    public SuccessResponse<Long> edit(@RequestBody AnswerEditRequest answerEditRequest) {
+        Long editId = questionService.edit(answerEditRequest);
+        return new SuccessResponse<>(editId);
     }
 
 
@@ -90,8 +90,8 @@ public class QuestionController {
                             schema = @Schema(implementation = SearchCondition.class)))
     })
     @DeleteMapping("/answer")
-    public SuccessResponse<SearchCondition> delete(@RequestBody SearchCondition searchCondition) {
-        SearchCondition condition = questionService.delete(searchCondition);
-        return new SuccessResponse<>(condition);
+    public SuccessResponse<Long> delete(@RequestBody SearchCondition searchCondition) {
+        Long deleteId = questionService.delete(searchCondition);
+        return new SuccessResponse<>(deleteId);
     }
 }

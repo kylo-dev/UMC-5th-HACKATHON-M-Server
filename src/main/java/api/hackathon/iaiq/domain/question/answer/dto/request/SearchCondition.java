@@ -6,18 +6,21 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import lombok.Getter;
 
+@Getter
 public class SearchCondition {
 
     @Schema(description = "답 년도", example = "2023")
-    private String year;
+    public String year;
 
     @Schema(description = "답 월", example = "12")
-    private String month;
+    public String month;
 
     @Schema(description = "답 일", example = "25")
-    private String day;
+    public String day;
 
+    @Schema(hidden = true)
     public LocalDate getSearchDate() {
         try {
             String dateString = String.format("%s-%s-%s", year, month, day);
